@@ -1,0 +1,13 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "## Getting Started",
+  "main": "index.js",
+  "scripts": {
+    "server": "pipenv run flask run", 
+    "test": "dropdb trivia_test --if-exists && createdb trivia_test && psql trivia_test < trivia.psql && pipenv run nose2 -v -C"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
