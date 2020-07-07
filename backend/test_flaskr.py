@@ -111,8 +111,8 @@ class QuestionTestCase(unittest.TestCase):
             'category': 5
         }
         self.new_question_blank = {
-            'question': 'adfafd',
-            'answer': 'afdasfd',
+            'question': '',
+            'answer': '',
             'difficulty': 0,
             'category': 0
         }
