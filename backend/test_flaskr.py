@@ -110,6 +110,12 @@ class QuestionTestCase(unittest.TestCase):
             'difficulty': 'five',
             'category': 5
         }
+        self.new_question_blank = {
+            'question': 'adfafd',
+            'answer': 'afdasfd',
+            'difficulty': 0,
+            'category': 0
+        }
         self.search_questions = {
             'search_term': 'movie',
             'questions': [
@@ -215,6 +221,17 @@ class QuestionTestCase(unittest.TestCase):
         """test that users are not able to creat a question without the correct data types"""
         res = self.client().post('/api/questions',
                                 data=json.dumps(self.new_question_error),
+                                headers=headers
+                                )
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['additional_information'], 'Not all values are in the correct type. Please check the documentation')
+
+    def test_create_question_blank(self):
+        """test creating a blank question"""
+        res = self.client().post('/api/questions',
+                                data=json.dumps(self.new_question_blank),
                                 headers=headers
                                 )
         data = json.loads(res.data)

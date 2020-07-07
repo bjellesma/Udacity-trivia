@@ -50,12 +50,17 @@ def create_question():
         answer = data.get('answer')
         difficulty = data.get('difficulty')
         category = data.get('category')
+        # If any params are missing, we'll abort to a 422
+        if not question or not answer or not difficulty or not category:
+            raise ParsingError(message='Unable to parse')
         try:
             int(difficulty) and int(category)
         except Exception as err:
             print(f'error parsing for create_question: {err}') 
             raise ParsingError(message='Unable to parse')
-            
+        # Test if the difficulty and category are 0 when converted
+        if int(difficulty) == 0 or int(category) == 0:
+            raise ParsingError(message='Unable to parse')
         question = Question(
             question=question,
             answer=answer,
