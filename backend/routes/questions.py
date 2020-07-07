@@ -25,8 +25,6 @@ def get_questions():
     questions = Question.query.all()
     categories = Category.query.all()
     total_categories = [category.format() for category in categories]
-    for category in total_categories:
-        print(f'cat: {category}')
     total_questions = [question.format() for question in questions]
     if not total_questions:
         abort(404, description='There are no questions')
@@ -98,10 +96,12 @@ def get_questions_of_category(category_id):
     questions = Question.query.filter(Question.category==category_id).all()
     if len(questions) == 0:
         abort(404, description='Category out of range')
+    formatted_questions = [question.format() for question in questions]
     return jsonify({
         'success': True,
         'total_questions': len(questions),
-        'current_category': category_id
+        'current_category': category_id,
+        'questions': formatted_questions
     })
 
 @questions_routes.route('/api/search/questions/<search_term>', methods=['POST'])

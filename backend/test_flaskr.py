@@ -196,6 +196,7 @@ class QuestionTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         # assert true will ensure that a nonzero value is returned
         self.assertTrue(data['total_questions'])
+        self.assertTrue(data['questions'])
         self.assertEqual(data['current_category'], 2)
 
     def test_get_questions_of_category_error(self):
